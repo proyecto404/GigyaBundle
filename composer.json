@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "proyecto404/gigya-php-sdk": ">= dev-master"
+        "proyecto404/gigya-php-sdk": "dev-master"
     },
     "target-dir": "Proyecto404/GigyaBundle",
     "autoload": {
