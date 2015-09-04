@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Proyecto404\\GigyaBundle": ""
+            "Proyecto404\\GigyaBundle\\": ""
         }
     },
     "extra": {
