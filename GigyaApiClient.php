@@ -47,75 +47,7 @@ class GigyaApiClient
         return \SigUtils::validateUserSignature($uid, $timestamp, $this->secretKey, $uidSignature);
     }
 
-    public function accounts()
-    {
-        $this->methodNamespace = 'accounts';
-
-        return $this;
-    }
-
-    public function audit()
-    {
-        $this->methodNamespace = 'audit';
-
-        return $this;
-    }
-
-    public function chat()
-    {
-        $this->methodNamespace = 'chat';
-
-        return $this;
-    }
-
-    public function comments()
-    {
-        $this->methodNamespace = 'comments';
-
-        return $this;
-    }
-
-    public function dataStore()
-    {
-        $this->methodNamespace = 'ds';
-
-        return $this;
-    }
-
-    public function gameMechanics()
-    {
-        $this->methodNamespace = 'gm';
-
-        return $this;
-    }
-
-    public function identityStorage()
-    {
-        $this->methodNamespace = 'ids';
-
-        return $this;
-    }
-
-    public function reports()
-    {
-        $this->methodNamespace = 'reports';
-
-        return $this;
-    }
-
-    public function socialize()
-    {
-        $this->methodNamespace = 'socialize';
-
-        return $this;
-    }
-
-    public function __call($name, array $arguments)
-    {
-        if (false === strpos($name, '.') && !is_null($this->methodNamespace)) {
-            $name = $this->methodNamespace . '.' . $name;
-        }
-
-        return $this->sendRequest($name, $arguments);
+    public function validateUserSignature($uid, $signatureTimestamp, $uidSignature) {
+        return \SigUtils::validateUserSignature($uid, $signatureTimestamp, $this->secretKey, $uidSignature);
     }
 }

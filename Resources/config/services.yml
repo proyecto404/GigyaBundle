@@ -1,1 +1,47 @@
 services:
+    proyecto404_gigya.api:
+        class: %proyecto404_gigya.api.class%
+        arguments:
+            apiKey: %proyecto404_gigya.api_key%
+            secretKey: %proyecto404_gigya.secret_key%
+
+    proyecto404_gigya.security.authentication.entry_point:
+        abstract: true
+        public: false
+        class: Proyecto404\GigyaBundle\Security\EntryPoint\GigyaAuthenticationEntryPoint
+        arguments:
+            - @http_kernel
+            - @security.http_utils
+
+    proyecto404_gigya.security.authentication.listener:
+        abstract: true
+        class: Proyecto404\GigyaBundle\Security\Firewall\GigyaAuthenticationListener
+        arguments:
+            - @security.context
+            - @security.authentication.manager
+            - @security.authentication.session_strategy
+            - @security.http_utils
+            -
+            - @security.authentication.success_handler
+            - @security.authentication.failure_handler
+            - @proyecto404_gigya.api
+            - []
+            - @logger
+            - @event_dispatcher
+        tags:
+            - { name: monolog.logger, channel:security  }
+
+    proyecto404_gigya.auth:
+        public: false
+        class: Proyecto404\GigyaBundle\Security\Authentication\Provider\GigyaAuthenticationProvider
+        arguments:
+            -
+            - @proyecto404_gigya.api
+
+    proyecto404_gigya.twig:
+        class: %proyecto404_gigya.twig.class%
+        arguments:
+            - @service_container
+        tags:
+            - { name: twig.extension  }
+
